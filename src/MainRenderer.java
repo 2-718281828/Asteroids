@@ -17,7 +17,7 @@ public class MainRenderer extends Renderer {
             super(dimensions, camera);
             triangles = new Triangles();
             try {
-                torus = LoadModel.loadModel(new File("C:\\Users\\Wiktoria Mazur\\Desktop\\Asteroids\\src\\torus.model"), Color.green, camera.renderer, camera); // ładujemy model z pliku
+                torus = LoadModel.loadModel(new File(), Color.green, camera.renderer, camera); // ładujemy model z pliku
                 torus.init(triangles); // inicjalizujemy model (wymagane)
             } catch (Exception e) {
                 e.printStackTrace();
