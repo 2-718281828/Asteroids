@@ -12,7 +12,7 @@ public class MainLogic implements Logic {
         }
 
         public void update() {
-            camera.update(); // aktualizacja kamery
+            camera.update(); // aktualizacja kameryy
         }
 
 }

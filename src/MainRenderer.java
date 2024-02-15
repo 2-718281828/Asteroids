@@ -14,7 +14,7 @@ public class MainRenderer extends Renderer {
     public Model torus;
     String classPath = getClass().getResource("torus.model").getPath(); // żebyśmy nie musieli tego pisać za każdym razem
      public MainRenderer(Vector2 dimensions, Camera camera) {
-            super(dimensions, camera);
+            super(dimensions, camera);//
             triangles = new Triangles();
             try {
                 torus = LoadModel.loadModel(new File(), Color.green, camera.renderer, camera); // ładujemy model z pliku
