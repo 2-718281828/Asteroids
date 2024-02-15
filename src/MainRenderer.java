@@ -22,11 +22,14 @@ public class MainRenderer extends Renderer {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            KeyHandler keyHandler = new KeyHandler(new Player(torus, new Vector3(0,0,0),));
+	    EntityHandler entityHandler = new EntityHandler(); // tworzymy nowy entityHanlder - zarzadza obiektami
+            KeyHandler keyHandler = new KeyHandler(new Player(torus, new Vector3(0,0,0),entityHandler)); // nowy keyhanlder ktory rejestruje przyciski od gracza, jako agrument dajemy mu nowego gracza, ktory znajduje sie w 0,0,0, jego modelem jest torus
+	    this.addKeyListener(keyHandler); // dodajemy keyhandler jako sluchacz przyciskow 
+	player.model.init(triangles);
      }
 
      public void render(Graphics2D graphics) {
-         triangles.render(graphics);
+         triangles.render(graphics); 
      }
 
 }
