@@ -20,7 +20,7 @@ public class Main {
         camera.enableRotationYaw = false; // obracanie się wokół osi y (prawo - lewo)
         camera.enableMovement = false; // poruszanie się kamerą
         MainLogic mainLogic = new MainLogic(camera); // tutaj 60 razy na sekundę jest wykonywana logika
-        Engine engine = new Engine(renderer, mainLogic); // tutaj jest pętla gry
+        Engine engine = new Engine(renderer, mainLogic); // tutaj jest pętla gryy
         engine.start(); // uruchamiamy silnik
     }
 }
