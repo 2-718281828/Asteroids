@@ -1,6 +1,7 @@
 package src;
 
 import engine.Logic;
+import entity.EntityHandler;
 import renderer.Camera;
 
 public class MainLogic implements Logic {
@@ -9,6 +10,8 @@ public class MainLogic implements Logic {
 
         public MainLogic(Camera camera) {
             this.camera = camera; // this.camera odnosi się do kamery publicznej dla całej klasy, a camera jest dostępna tylko dla tego konstruktora, dlatego chcemy "upublicznić" kamerę, żeby móc z niej korzystać w innych funkcjach
+            ((MainRenderer)camera.renderer).entityHandler.logic();
+
         }
 
         public void update() {
