@@ -15,6 +15,7 @@ public class Main {
         Camera camera = new Camera();
         Renderer renderer = new MainRenderer(new Vector2(WIDTH, HEIGHT), camera);
         Window window = new Window(new Vector2(WIDTH, HEIGHT), TITLE, renderer);
+	renderer.addKeyListener(camera);
         renderer.perspective = false;
         camera.enableRotationPitch = false; // obracanie się wokół osi x (góra - dół)
         camera.enableRotationYaw = false; // obracanie się wokół osi y (prawo - lewo)
