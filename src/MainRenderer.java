@@ -14,12 +14,13 @@ public class MainRenderer extends Renderer {
 
     public Triangles triangles;
     public Model torus;
-    String classPath = getClass().getResource("torus.model").getPath(); // żebyśmy nie musieli tego pisać za każdym razem
+    String classPath = getClass().getResource("").getPath(); // żebyśmy nie musieli tego pisać za każdym razem
      public MainRenderer(Vector2 dimensions, Camera camera) {
             super(dimensions, camera);//
             triangles = new Triangles();
             try {
-                torus = LoadModel.loadModel(new File("torus.model"), Color.green, camera.renderer, camera); // ładujemy model z pliku
+		Console.log(classPath + "torus.model");
+                torus = LoadModel.loadModel(new File(classPath + "torus.model"), Color.green, camera.renderer, camera); // ładujemy model z pliku
                 torus.init(triangles); // inicjalizujemy model (wymagane)
             } catch (Exception e) {
                 e.printStackTrace();
