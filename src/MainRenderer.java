@@ -22,13 +22,11 @@ public class MainRenderer extends Renderer {
             triangles = new Triangles();
             try {
                 playerM = LoadModel.loadModel(new File(getClass().getResource("player.model").getPath()), Color.white, camera.renderer, camera); // ładujemy model z pliku
-                playerM.init(triangles); // inicjalizujemy model (wymagane)
 		playerMMoving = LoadModel.loadModel(new File(getClass().getResource("playerMoving.model").getPath()), Color.white, camera.renderer, camera);
-		playerMMoving.init(triangles);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-         Player player = new Player(playerM, new Vector3(0,0,0), entityHandler);
+         Player player = new Player(playerM, new Vector3(0,0,0), entityHandler, this);
          KeyHandler keyHandler1 = new KeyHandler(player);
          entityHandler.entities.add(player);
          addKeyListener(keyHandler1);
