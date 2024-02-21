@@ -14,7 +14,7 @@ public class MainLogic implements Logic {
 
         public void update() {
             camera.update(); // aktualizacja kameryy
-            ((MainRenderer)camera.renderer).entityHandler.logic();
+            ((MainRenderer) camera.renderer).entityHandler.logic();
         }
 
 }
