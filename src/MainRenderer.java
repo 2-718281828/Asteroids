@@ -16,7 +16,7 @@ public class MainRenderer extends Renderer {
 
     public Triangles triangles;
     public Model playerM, playerMMoving;
-    public EntityHandler entityHandler = new EntityHandler(); // tworzymy nowy entityHanlder - zarzadza obiektami
+    public EntityHandler entityHandler = new EntityHandler(); // tworzymy nowy entityHanlder - zarzadza obiektamii
     URL classPath = getClass().getResource("player.model"); // żebyśmy nie musieli tego pisać za każdym razem
     URL classPathh = getClass().getResource("playerMoving.model"); // żebyśmy nie musieli tego pisać za każdym razem
 

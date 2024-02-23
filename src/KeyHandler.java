@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    Player player;
+    Player player;//
 
     public KeyHandler(Player player){
         Console.log("a");
