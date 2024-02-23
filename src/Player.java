@@ -36,7 +36,7 @@ public class Player extends Entity {
 
 		if (keys[0]) { // w gore
 			moving = true;
-			double movingAngle // wez kat z wektora predkosci
+			double movingAngle // wez kat z wektora predkoscii
 			if (Math.abs(velocity.y) >= Math.abs(maxs * Math.cos(theta))) {
 				if (velocity.y < 0) {
 					velocity.y = -Math.abs(maxs * Math.cos(theta));
