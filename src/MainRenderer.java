@@ -9,6 +9,7 @@ import util.Console;
 
 import java.awt.*;
 import java.io.File;
+import java.net.URL;
 import java.util.concurrent.CompletionService;
 
 public class MainRenderer extends Renderer {
@@ -16,13 +17,15 @@ public class MainRenderer extends Renderer {
     public Triangles triangles;
     public Model playerM, playerMMoving;
     public EntityHandler entityHandler = new EntityHandler(); // tworzymy nowy entityHanlder - zarzadza obiektami
+    URL classPath = getClass().getResource("player.model"); // żebyśmy nie musieli tego pisać za każdym razem
+    URL classPathh = getClass().getResource("playerMoving.model"); // żebyśmy nie musieli tego pisać za każdym razem
 
      public MainRenderer(Vector2 dimensions, Camera camera) {
             super(dimensions, camera);//
             triangles = new Triangles();
             try {
-                playerM = LoadModel.loadModel(new File(getClass().getResource("player.model").getPath()), Color.white, camera.renderer, camera); // ładujemy model z pliku
-		playerMMoving = LoadModel.loadModel(new File(getClass().getResource("playerMoving.model").getPath()), Color.white, camera.renderer, camera);
+                playerM = LoadModel.loadModel(new File(classPath.toURI()), Color.white, camera.renderer, camera); // ładujemy model z pliku
+		playerMMoving = LoadModel.loadModel(new File(classPathh.toURI()), Color.white, camera.renderer, camera);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -38,3 +41,12 @@ public class MainRenderer extends Renderer {
          triangles.render(graphics);
      }
 }
+
+//    URL classPath = getClass().getResource("player.model"); // żebyśmy nie musieli tego pisać za każdym razem
+//    public MainRenderer(Vector2 dimensions, Camera camera) {
+//        super(dimensions, camera);//
+//        triangles = new Triangles();
+//        System.out.print(classPath);
+//        try {
+//            torus = LoadModel.loadModel(new File(classPath.toURI()), Color.white, camera.renderer, camera); // ładujemy model z pliku
+//            torus.init(triangles); // inicjalizujemy model (wymagane)
