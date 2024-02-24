@@ -36,21 +36,21 @@ public class Player extends Entity {
 
 		if (keys[0]) { // w gore
 			moving = true;
-			double movingAngle // wez kat z wektora predkoscii
-			if (Math.abs(velocity.y) >= Math.abs(maxs * Math.cos(theta))) {
+			double movingAngle = Math.atan2(velocity.y, velocity.x); 
+			if (Math.abs(velocity.y) >= Math.abs(maxs * Math.cos(movingAngle))) {
 				if (velocity.y < 0) {
-					velocity.y = -Math.abs(maxs * Math.cos(theta));
+					velocity.y = -Math.abs(maxs * Math.cos(movingAngle));
 				}
 				else if (velocity.y >= 0) {
-					velocity.y = Math.abs(maxs * Math.cos(theta));
+					velocity.y = Math.abs(maxs * Math.cos(movingAngle));
 				}
 			}
-			if (Math.abs(velocity.x) >= Math.abs(maxs * Math.sin(theta))) {
+			if (Math.abs(velocity.x) >= Math.abs(maxs * Math.sin(movingAngle))) {
 				if (velocity.x < 0) {
-					velocity.x = -Math.abs(maxs * Math.sin(theta));
+					velocity.x = -Math.abs(maxs * Math.sin(movingAngle));
 				}
 				else if (velocity.x >= 0) {
-					velocity.x = Math.abs(maxs * Math.sin(theta));
+					velocity.x = Math.abs(maxs * Math.sin(movingAngle));
 				}
 			}
 			velocity.y += s * Math.cos(theta);
