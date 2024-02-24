@@ -17,7 +17,7 @@ public class Player extends Entity {
 	}
 
 	double theta = 0; // kąt pod jakim gracz jest skierowany
-	double s = 0.0005;
+	double s = 0.0003;
 	double maxs = 0.01;
 	double rotA = 0, rotB = 0;
 	Vector3 posA = new Vector3(0, 0, 0);
@@ -27,38 +27,28 @@ public class Player extends Entity {
 	public void logic() {
 		boolean prevMoving = moving;
 		if (keys[2]) {
-			// jeśli strzałka w lewo wciśnięta, obróć przeciwnie do wsk zegara
+			// jeśli strzałka w prawo wciśnięta, obróć przeciwnie do wsk zegara
 			theta -= 0.1;
-			model.rotate(2, -0.1);
+			model.rotate(2, -.1);
 		} else if (keys[3]) {
-			// jeśli strzałka w prawo wciśnięta, obróć zgodnie z wsk zegara
+			// jeśli strzałka w lewo wciśnięta, obróć zgodnie z wsk zegara
 			theta += 0.1;
 			model.rotate(2, 0.1);
 		}
-
 		if (keys[0]) { 
 			moving = true;
-			double movingAngle = Math.atan2(velocity.y, velocity.x); // kęt pod jakim porusza się (nie jest skierowany, tylko się porusza) statek
-			// ograniczenie preękości
-			if (Math.abs(velocity.y) >= Math.abs(maxs * Math.cos(movingAngle))) {
-				if (velocity.y < 0) {
-					velocity.y = -Math.abs(maxs * Math.cos(movingAngle));
-				}
-				else if (velocity.y >= 0) {
-					velocity.y = Math.abs(maxs * Math.cos(movingAngle));
-				}
-			}
-			if (Math.abs(velocity.x) >= Math.abs(maxs * Math.sin(movingAngle))) {
-				if (velocity.x < 0) {
-					velocity.x = -Math.abs(maxs * Math.sin(movingAngle));
-				}
-				else if (velocity.x >= 0) {
-					velocity.x = Math.abs(maxs * Math.sin(movingAngle));
-				}
-			}
 			// dodanie do prędkości
 			velocity.y += s * Math.cos(theta);
 			velocity.x -= s * Math.sin(theta);
+
+			double movingAngle = Math.atan2(-velocity.x, velocity.y); // kęt pod jakim porusza się (nie jest skierowany, tylko się porusza) statek
+			// ograniczenie preękości
+			if (Math.abs(velocity.y) >= Math.abs(maxs * Math.cos(movingAngle))) {
+				velocity.y = maxs * Math.cos(movingAngle);
+			}
+			if (Math.abs(velocity.x) >= Math.abs(maxs * Math.sin(movingAngle))) {
+				velocity.x = -maxs * Math.sin(movingAngle);
+			}
 		} else {
 			moving = false;
 		}
