@@ -25,7 +25,7 @@ public class MainRenderer extends Renderer {
             triangles = new Triangles();
             try {
                 playerM = LoadModel.loadModel(new File(classPath.toURI()), Color.white, camera.renderer, camera); // ładujemy model z pliku
-		playerMMoving = LoadModel.loadModel(new File(classPathh.toURI()), Color.white, camera.renderer, camera);
+		        playerMMoving = LoadModel.loadModel(new File(classPathh.toURI()), Color.white, camera.renderer, camera);
             } catch (Exception e) {
                 e.printStackTrace();
             }

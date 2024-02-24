@@ -1,5 +1,7 @@
 package src;
 
+import entity.EntityHandler;
+import maths.Vector3;
 import util.Console;
 
 import java.awt.event.KeyEvent;
@@ -7,10 +9,10 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    Player player;//
+    Player player;
 
     public KeyHandler(Player player){
-        Console.log("a");
+        //Console.log("a");
         this.player = player;
     }
 
@@ -33,6 +35,10 @@ public class KeyHandler implements KeyListener {
         if(e.getKeyCode()==KeyEvent.VK_LEFT) {
             player.keys[3] = true;
         }
+        if(e.getKeyCode()==KeyEvent.VK_SPACE){
+            player.space = true;
+        }
+
     }
 
     @Override
@@ -49,5 +55,9 @@ public class KeyHandler implements KeyListener {
         if(e.getKeyCode()==KeyEvent.VK_LEFT) {
             player.keys[3] = false;
         }
+        if(e.getKeyCode()==KeyEvent.VK_SPACE){
+            player.space = false;
+        }
+
     }
 }
