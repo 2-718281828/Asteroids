@@ -13,30 +13,33 @@ public class Player extends Entity {
 
 	public Player(Model model, Vector3 vector3, EntityHandler entityHandler, MainRenderer renderer) {
 		super(model, vector3, entityHandler);
-		// model.scale(0.01);
 		this.renderer = renderer;
 	}
 
-	double theta = 0;
+	double theta = 0; // kąt pod jakim gracz jest skierowany
 	double s = 0.0005;
 	double maxs = 0.01;
 	double rotA = 0, rotB = 0;
 	Vector3 posA = new Vector3(0, 0, 0);
 	Vector3 posB = new Vector3(0, 0, 0);
+	Vector3 invPosition = new Vector3(0, 0, 0);
 
 	public void logic() {
 		boolean prevMoving = moving;
 		if (keys[2]) {
+			// jeśli strzałka w lewo wciśnięta, obróć przeciwnie do wsk zegara
 			theta -= 0.1;
 			model.rotate(2, -0.1);
 		} else if (keys[3]) {
+			// jeśli strzałka w prawo wciśnięta, obróć zgodnie z wsk zegara
 			theta += 0.1;
 			model.rotate(2, 0.1);
 		}
 
-		if (keys[0]) { // w gore
+		if (keys[0]) { 
 			moving = true;
-			double movingAngle = Math.atan2(velocity.y, velocity.x); 
+			double movingAngle = Math.atan2(velocity.y, velocity.x); // kęt pod jakim porusza się (nie jest skierowany, tylko się porusza) statek
+			// ograniczenie preękości
 			if (Math.abs(velocity.y) >= Math.abs(maxs * Math.cos(movingAngle))) {
 				if (velocity.y < 0) {
 					velocity.y = -Math.abs(maxs * Math.cos(movingAngle));
@@ -53,13 +56,15 @@ public class Player extends Entity {
 					velocity.x = Math.abs(maxs * Math.sin(movingAngle));
 				}
 			}
+			// dodanie do prędkości
 			velocity.y += s * Math.cos(theta);
 			velocity.x -= s * Math.sin(theta);
 		} else {
 			moving = false;
 		}
-		if (prevMoving != moving) {
+		if (prevMoving != moving) { // nie sprawdza wartości zmiennej moving, ale sprawdza czy ta wartość się zmieniła w ostatniej klatce
 			if (moving) {
+				// jeśli wykryto zmianę zmiennej moving na true, to zmień model na ten z płomykiem
 				rotA = theta;
 				posA.x = model.rotationAxis.x;
 				posA.y = model.rotationAxis.y;
@@ -74,6 +79,7 @@ public class Player extends Entity {
 				model.move(position);
 				model.init(renderer.triangles);
 			} else {
+				// jeśli wykryto zmianę zmiennej moving na false, to zmień model na zwykły
 				rotB = theta;
 				posB.x = model.rotationAxis.x;
 				posB.y = model.rotationAxis.y;
@@ -90,8 +96,12 @@ public class Player extends Entity {
 			}
 		}
 
+		invPosition.x = -position.x;
+		invPosition.y = -position.y;
+		invPosition.z = -position.z;
+		position.add(velocity); // przemieszcza obiekt gracza
 
-		//granica
+		// teleportuje gracza na drugą stronę ekranu jeśli za niego wyjdzie
 		if (position.x <= -1){
 			position.x = 1;
 		}
@@ -105,7 +115,8 @@ public class Player extends Entity {
 			position.y = -1*(renderer.dimensions.y/renderer.dimensions.x);
 		}
 
-		position.add(velocity);
-		model.move(velocity);
+		invPosition.add(position);
+		model.move(invPosition); // przemieszcza model gracza
+					 // invPosition to różnica położenia obiektu a modelu, dzięki temu program wie o ile ma przemieśćic gracza, gdyby przemieszczać model po prostu o velocity, to nie teleportował by on się na granicach ekranu
 	}
 }
