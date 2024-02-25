@@ -2,6 +2,7 @@ package src;
 
 import entity.Entity;
 import entity.EntityHandler;
+import maths.Vector2;
 import maths.Vector3;
 import renderer.*;
 import util.Console;
@@ -127,12 +128,19 @@ public class Player extends Entity {
 		if(space && time >= 10){
 			time = 0;
 			//spawnowanie pocisku, jego polozenie to position (polizenia gracza)
-			Model bulletM = LoadModel.loadModel(new File(classPath), Color.white, renderer, camera); // ładujemy model z pliku
-														 	Vector3 bulletP = new Vector3(position);
+
+			URL classPathhh = getClass().getResource("pocisk.model");
+			try {
+				bulletM = LoadModel.loadModel(new File(classPathhh.toURI()), Color.white, renderer, camera);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			Vector3 bulletP = new Vector3(position);
 			bulletP.add(new Vector3(-Math.sin(theta)*0.1, Math.cos(theta)*0.1, 0));
 			Bullet bullet = new Bullet(bulletM, bulletP, entityHandler, new Vector3(-vPocisku*Math.sin(theta),vPocisku*Math.cos(theta), 0), renderer);
 			entityHandler.entities.add(bullet);
 			bulletM.init(renderer.triangles);
 		}
+
 	}
 }
