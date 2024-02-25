@@ -22,9 +22,6 @@ public class Bullet extends Entity {
     @Override
     public void logic() {
 
-        // przemieszcza obiekt i model
-	    position.add(velocity);
-	    model.move(velocity);
 	    // odmierza czas aby usunąć ten obiekt
         t++;
 	if (t >= 120) {
@@ -33,6 +30,8 @@ public class Bullet extends Entity {
 	}
 
 
+	invPosition.x = position.x;
+	invPosition.y = position.y;
         if (position.x <= -1){
             position.x = 1;
         }
@@ -50,6 +49,9 @@ public class Bullet extends Entity {
         invPosition.add(position);
         model.move(invPosition);
 
+        // przemieszcza obiekt i model
+	    position.add(velocity);
+	    model.move(velocity);
 
     }
 }
