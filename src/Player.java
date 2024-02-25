@@ -24,17 +24,19 @@ public class Player extends Entity {
 	public Player(Model model, Vector3 vector3, EntityHandler entityHandler, MainRenderer renderer) {
 		super(model, vector3, entityHandler);
 		this.renderer = renderer;
-		//model.scale(0.01);
 	}
 
 	double theta = 0; // kąt pod jakim gracz jest skierowany
 	double s = 0.0003;
-	double vPocisku = 0.005;
+	double vPocisku = 0.015;
 	double maxs = 0.01;
 	double rotA = 0, rotB = 0;
 	Vector3 posA = new Vector3(0, 0, 0);
 	Vector3 posB = new Vector3(0, 0, 0);
 	Vector3 invPosition = new Vector3(0, 0, 0);
+	String classPath = getClass().getResource("pocisk.model").getPath();
+	int time = 0;
+
 
 	public void logic() {
 		boolean prevMoving = moving;
@@ -120,46 +122,17 @@ public class Player extends Entity {
 		invPosition.add(position);
 		model.move(invPosition); // przemieszcza model gracza
 					 // invPosition to różnica położenia obiektu a modelu, dzięki temu program wie o ile ma przemieśćic gracza, gdyby przemieszczać model po prostu o velocity, to nie teleportował by on się na granicach ekranu
+		time++; // odmierza czas między wystrzałami
 		//bullet
-		if(space){
+		if(space && time >= 10){
+			time = 0;
 			//spawnowanie pocisku, jego polozenie to position (polizenia gracza)
-			URL classPathhh = getClass().getResource("pocisk.model"); // żebyśmy nie musieli tego pisać za każdym razem
-
-			try {
-				bulletM = LoadModel.loadModel(new File(classPathhh.toURI()), Color.white, camera.renderer, camera); // ładujemy model z pliku
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			Bullet bullet = new Bullet(bulletM, new Vector3(0,0,0), entityHandler, new Vector3(0,0,0));
+			Model bulletM = LoadModel.loadModel(new File(classPath), Color.white, renderer, camera); // ładujemy model z pliku
+														 	Vector3 bulletP = new Vector3(position);
+			bulletP.add(new Vector3(-Math.sin(theta)*0.1, Math.cos(theta)*0.1, 0));
+			Bullet bullet = new Bullet(bulletM, bulletP, entityHandler, new Vector3(-vPocisku*Math.sin(theta),vPocisku*Math.cos(theta), 0), renderer);
 			entityHandler.entities.add(bullet);
-			bullet.model.init(triangles);
-
-			velocity.x = -vPocisku*Math.sin(theta);
-			velocity.y = vPocisku*Math.cos(theta);
-
-
-
-
-			//model = renderer.bulletM;
-//			rotA = theta;
-//			posA.x = model.rotationAxis.x;
-//			posA.y = model.rotationAxis.y;
-//			posA.z = model.rotationAxis.z;
-//			model.remove(renderer.triangles);
-//			model = renderer.playerMMoving;
-//			model.rotate(2, -rotB);
-//			model.rotate(2, theta);
-//			posB.multiply(-1);
-//			model.move(posB);
-//			posB.multiply(-1);
-//			model.move(position);
-//			model.init(renderer.triangles);
-
-
-//			Vector3 posA = new Vector3(0, 0, 0);
-//			Vector3 posB = new Vector3(0, 0, 0);
-//			Vector3 invPosition = new Vector3(0, 0, 0);
-
+			bulletM.init(renderer.triangles);
 		}
 	}
 }

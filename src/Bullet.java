@@ -7,14 +7,26 @@ import renderer.Model;
 
 public class Bullet extends Entity {
 
-    public Bullet(Model bulletM, Vector3 vector3, EntityHandler entityHandler, Vector3 velocity) {
+	MainRenderer renderer;
+
+    public Bullet(Model bulletM, Vector3 vector3, EntityHandler entityHandler, Vector3 velocity, MainRenderer renderer) {
         super(bulletM, vector3, entityHandler);
-        this.velocity = new Vector3(velocity);
-        model.scale(0.05);
+        this.velocity = velocity;
+	this.renderer = renderer;
+        model.scale(0.005);
     }
 
+    int t = 0;
     @Override
     public void logic() {
-
+	    // przemieszcza obiekt i model
+	position.add(velocity);
+	model.move(velocity);
+	// odmierza czas aby usunąć ten obiekt
+	t++;
+	if (t >= 120) {
+		model.remove(renderer.triangles);
+		entityHandler.entities.remove(this);
+	}
     }
 }
