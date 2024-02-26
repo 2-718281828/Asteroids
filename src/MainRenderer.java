@@ -19,6 +19,8 @@ public class MainRenderer extends Renderer {
     public EntityHandler entityHandler = new EntityHandler(); // tworzymy nowy entityHanlder - zarzadza obiektamii
     URL classPath = getClass().getResource("player.model"); // żebyśmy nie musieli tego pisać za każdym razem
     URL classPathh = getClass().getResource("playerMoving.model"); // żebyśmy nie musieli tego pisać za każdym razem
+URL asteroid = getClass().getResource("asteroida1.model");
+Model asteroidM;
 
      public MainRenderer(Vector2 dimensions, Camera camera) {
             super(dimensions, camera);//
@@ -26,14 +28,20 @@ public class MainRenderer extends Renderer {
             try {
                 playerM = LoadModel.loadModel(new File(classPath.toURI()), Color.white, camera.renderer, camera); // ładujemy model z pliku
 		        playerMMoving = LoadModel.loadModel(new File(classPathh.toURI()), Color.white, camera.renderer, camera);
+
+	 asteroidM = LoadModel.loadModel(new File(asteroid.toURI()), Color.white, camera.renderer, camera);
             } catch (Exception e) {
                 e.printStackTrace();
             }
          Player player = new Player(playerM, new Vector3(0,0,0), entityHandler, this);
          KeyHandler keyHandler1 = new KeyHandler(player);
          entityHandler.entities.add(player);
+	 entityHandler.entities.add(new Asteroid(asteroidM, new Vector3(0, 0, 0), entityHandler, new Vector3(0.01, -0.01, 0), 1, this));
+	asteroidM.init(triangles);
          addKeyListener(keyHandler1);
 	 addKeyListener(camera);
+	 playerM.scale(0.5);
+	 playerMMoving.scale(0.5);
 	player.model.init(triangles);
      }
 

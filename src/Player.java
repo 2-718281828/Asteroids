@@ -127,7 +127,7 @@ public class Player extends Entity {
 		//bullet
 		if(space && time >= 10){
 			time = 0;
-			//spawnowanie pocisku, jego polozenie to position (polizenia gracza)
+			//spawnowanie pocisku, jego polozenie to position (polizenia gracza) przesuniete nieco do przodu
 
 			URL classPathhh = getClass().getResource("pocisk.model");
 			try {
@@ -136,7 +136,7 @@ public class Player extends Entity {
 				e.printStackTrace();
 			}
 			Vector3 bulletP = new Vector3(position);
-			bulletP.add(new Vector3(-Math.sin(theta)*0.1, Math.cos(theta)*0.1, 0));
+			bulletP.add(new Vector3(-Math.sin(theta)*0.05, Math.cos(theta)*0.05, 0));
 			Bullet bullet = new Bullet(bulletM, bulletP, entityHandler, new Vector3(-vPocisku*Math.sin(theta),vPocisku*Math.cos(theta), 0), renderer);
 			entityHandler.entities.add(bullet);
 			bulletM.init(renderer.triangles);
