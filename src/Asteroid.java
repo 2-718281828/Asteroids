@@ -1,36 +1,25 @@
 package src;
 
-import entity.Entity;
-import entity.EntityHandler;
-import maths.Vector3;
-import renderer.Model;
+import entity.*;
+import renderer.*;
+import maths.*;
 
-public class Bullet extends Entity {
+public class Asteroid extends Entity {
 
+	double size;
+	Vector3 invPosition = new Vector3(0, 0, 0);
 	MainRenderer renderer;
-    Vector3 invPosition = new Vector3(0, 0, 0);
 
-
-    public Bullet(Model bulletM, Vector3 vector3, EntityHandler entityHandler, Vector3 velocity, MainRenderer renderer) {
-        super(bulletM, vector3, entityHandler);
-        this.velocity = velocity;
-	    this.renderer = renderer;
-        model.scale(0.0025);
-    }
-
-    int t = 0;
-    @Override
-    public void logic() {
-
-	    // odmierza czas aby usunąć ten obiekt
-        t++;
-	if (t >= 70) {
-		model.remove(renderer.triangles);
-		entityHandler.entities.remove(this);
+	public Asteroid(Model model, Vector3 position, EntityHandler entityHandler, Vector3 velocity, double size, MainRenderer renderer) {
+		super(model, position, entityHandler);
+		this.velocity = velocity;
+		this.size = size;
+		this.renderer = renderer;
+		model.scale(size * 0.02);
 	}
 
-
-	invPosition.x = position.x;
+	public void logic() {
+			invPosition.x = position.x;
 	invPosition.y = position.y;
         if (position.x <= -1){
             position.x = 1;
@@ -53,5 +42,5 @@ public class Bullet extends Entity {
 	    position.add(velocity);
 	    model.move(velocity);
 
-    }
+	}
 }
