@@ -26,7 +26,8 @@ public class MainRenderer extends Renderer {
 URL asteroid1 = getClass().getResource("asteroida1.model");
 URL asteroid2 = getClass().getResource("a2.model");
 URL asteroid3 = getClass().getResource("a3.model");
-Model asteroidM, asteroidMM, asteroidMMM;
+URL ufo = getClass().getResource("ufo1.model");
+Model asteroidM, asteroidMM, asteroidMMM, ufo1;
 
      public MainRenderer(Vector2 dimensions, Camera camera) {
             super(dimensions, camera);//
@@ -80,6 +81,16 @@ Model asteroidM, asteroidMM, asteroidMMM;
                      entityHandler.entities.add(new Asteroid(asteroidMMM, new Vector3(x, y, 0), entityHandler, new Vector3(v3, -v3, 0), 0.7, this));
 
              }
+
+             try {
+                 ufo1 = LoadModel.loadModel(new File(ufo.toURI()), Color.white, camera.renderer, camera);
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+             ufo1.init(triangles);
+             entityHandler.entities.add(new Ufo(ufo1, new Vector3(0, 0, 0), entityHandler, new Vector3(0.001,0.001,0), 0.7, this));
+
+
          }
 
          addKeyListener(keyHandler1);
