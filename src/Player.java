@@ -152,5 +152,16 @@ public class Player extends Entity {
 				}
 			}
 		}
+		for (int i = 0; i < entityHandler.entities.size(); i++) {
+			if (entityHandler.entities.get(i) != this) {
+				if (collision(entityHandler.entities.get(i).hitbox)) {
+					if (entityHandler.entities.get(i).getClass() == Ufo.class) {
+						util.Console.log("Kolizja z asteroidą");
+						entityHandler.entities.get(i).model.remove(renderer.triangles);
+						entityHandler.entities.remove(entityHandler.entities.get(i));
+					}
+				}
+			}
+		}
 	}
 }
