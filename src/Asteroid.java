@@ -4,6 +4,8 @@ import entity.*;
 import renderer.*;
 import maths.*;
 
+import java.io.Console;
+
 public class Asteroid extends Entity {
 
 	double size;
@@ -16,6 +18,7 @@ public class Asteroid extends Entity {
 		this.size = size;
 		this.renderer = renderer;
 		model.scale(size * 0.02);
+		updateHitbox();
 	}
 
 	public void logic() {
@@ -42,5 +45,7 @@ public class Asteroid extends Entity {
 	    position.add(velocity);
 	    model.move(velocity);
 
+		updateHitbox();
 	}
+
 }

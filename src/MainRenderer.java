@@ -10,9 +10,13 @@ import util.Console;
 import java.awt.*;
 import java.io.File;
 import java.net.URL;
+import java.util.Random;
 import java.util.concurrent.CompletionService;
+import java.util.random.*;
 
 public class MainRenderer extends Renderer {
+
+    Random random = new Random();
 
     public Triangles triangles;
     public Model playerM, playerMMoving;
@@ -30,9 +34,6 @@ Model asteroidM, asteroidMM, asteroidMMM;
             try {
                 playerM = LoadModel.loadModel(new File(classPath.toURI()), Color.white, camera.renderer, camera); // ładujemy model z pliku
 		        playerMMoving = LoadModel.loadModel(new File(classPathh.toURI()), Color.white, camera.renderer, camera);
-                asteroidM = LoadModel.loadModel(new File(asteroid1.toURI()), Color.white, camera.renderer, camera);
-                asteroidMM = LoadModel.loadModel(new File(asteroid2.toURI()), Color.white, camera.renderer, camera);
-                asteroidMMM = LoadModel.loadModel(new File(asteroid3.toURI()), Color.white, camera.renderer, camera);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -41,10 +42,46 @@ Model asteroidM, asteroidMM, asteroidMMM;
          Player player = new Player(playerM, new Vector3(0,0,0), entityHandler, this);
          KeyHandler keyHandler1 = new KeyHandler(player);
          entityHandler.entities.add(player);
-	 entityHandler.entities.add(new Asteroid(asteroidM, new Vector3(0, 0, 0), entityHandler, new Vector3(0.01, -0.01, 0), 1, this));
-	asteroidM.init(triangles);
-	asteroidMM.init(triangles);
-	asteroidMMM.init(triangles);
+
+         for(int i = 0; i < 3; i++){
+             int a = random.nextInt(3);
+             double x = random.nextDouble(2)-1;
+             double y = random.nextDouble(2)-1;
+             double v1 = random.nextDouble(0.02)-0.01;
+             double v2 = random.nextDouble(0.02)-0.01;
+             double v3 = random.nextDouble(0.02)-0.01;
+             switch (a) {
+                 case 0:
+                     try {
+                         asteroidM = LoadModel.loadModel(new File(asteroid1.toURI()), Color.white, camera.renderer, camera);
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                     asteroidM.init(triangles);
+                     entityHandler.entities.add(new Asteroid(asteroidM, new Vector3(x, y, 0), entityHandler, new Vector3(v1,-v1,0), 0.7, this));
+
+                 case 1:
+                     try {
+                         asteroidMM = LoadModel.loadModel(new File(asteroid2.toURI()), Color.white, camera.renderer, camera);
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                     asteroidMM.init(triangles);
+                     entityHandler.entities.add(new Asteroid(asteroidMM, new Vector3(x, y, 0), entityHandler, new Vector3(v2, -v2, 0), 0.7, this));
+
+
+                 case 2:
+                     try {
+                         asteroidMMM = LoadModel.loadModel(new File(asteroid3.toURI()), Color.white, camera.renderer, camera);
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                     asteroidMMM.init(triangles);
+                     entityHandler.entities.add(new Asteroid(asteroidMMM, new Vector3(x, y, 0), entityHandler, new Vector3(v3, -v3, 0), 0.7, this));
+
+             }
+         }
+
          addKeyListener(keyHandler1);
 	 addKeyListener(camera);
 	 playerM.scale(0.5);
