@@ -4,9 +4,8 @@ import java.awt.*;
 import util.Console;
 
 public class HUD {
-
 	public int score;
-	public int lifes;
+	public int lifes = 3;
 	Player player;
 	Font font;
 	public HUD(Player player) {
@@ -19,6 +18,11 @@ public class HUD {
 	}
 
 	public void render(Graphics2D graphics) {
+		graphics.setColor(Color.white);
+		graphics.setFont(font);
+		if(!player.renderer.game){
+			graphics.drawString("Press ENTER to play", 0, 0);
+		}
 		graphics.setColor(Color.white);
 		graphics.setFont(font);
 		graphics.drawString("Score: " + score, 10, 30);

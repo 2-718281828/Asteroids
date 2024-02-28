@@ -18,7 +18,7 @@ public class Player extends Entity {
 	boolean space = false;
 	boolean moving = false;
 	public Model bulletM;
-	MainRenderer renderer;
+	public MainRenderer renderer;
 	public Triangles triangles;
 
 
