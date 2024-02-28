@@ -73,10 +73,10 @@ public class MainRenderer extends Renderer {
 //    }
 
     public void render(Graphics2D graphics) {
-//        if (game) {
+        if (game) {
             triangles.render(graphics);
             hud.render(graphics);
-//        }
+        }
     }
 
     public void spawnUfo() {
