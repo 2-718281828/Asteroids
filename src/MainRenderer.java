@@ -15,6 +15,7 @@ import java.util.concurrent.CompletionService;
 import java.util.random.*;
 
 public class MainRenderer extends Renderer {
+    public boolean game = false;
 
     Random random = new Random();
 
@@ -27,7 +28,8 @@ public class MainRenderer extends Renderer {
     URL asteroid2 = getClass().getResource("a2.model");
     URL asteroid3 = getClass().getResource("a3.model");
     URL ufo = getClass().getResource("ufo11.model");
-    Model asteroidM, asteroidMM, asteroidMMM, ufo1;
+    URL title = getClass().getResource("text1.model");
+    Model asteroidM, asteroidMM, asteroidMMM, ufo1, text;
     public HUD hud;
 
     public MainRenderer(Vector2 dimensions, Camera camera) {
@@ -58,15 +60,28 @@ public class MainRenderer extends Renderer {
         playerMMoving.scale(0.5);
         player.model.init(triangles);
     }
+//    public void spawnTitle() {
+//        if (!game) {
+//            try {
+//                text = LoadModel.loadModel(new File(title.toURI()), Color.white, camera.renderer, camera);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            text.init(triangles);
+//            entityHandler.entities.add(new Title(text, new Vector3(0, 0, 0), entityHandler));
+//        }
+//    }
 
     public void render(Graphics2D graphics) {
-        triangles.render(graphics);
-        hud.render(graphics);
+//        if (game) {
+            triangles.render(graphics);
+            hud.render(graphics);
+//        }
     }
 
     public void spawnUfo() {
         int b = random.nextInt(2);
-        double p = random.nextDouble(2*dimensions.y/dimensions.x) - (dimensions.y/dimensions.x);
+        double p = random.nextDouble(2 * dimensions.y / dimensions.x) - (dimensions.y / dimensions.x);
         double vx = 0.0025;
         switch (b) {
             case 0:
@@ -85,7 +100,7 @@ public class MainRenderer extends Renderer {
                     e.printStackTrace();
                 }
                 ufo1.init(triangles);
-                entityHandler.entities.add(new Ufo(ufo1, new Vector3(1, p, 0), entityHandler, new Vector3(-vx, 0, 0),  this));
+                entityHandler.entities.add(new Ufo(ufo1, new Vector3(1, p, 0), entityHandler, new Vector3(-vx, 0, 0), this));
                 break;
 
         }
