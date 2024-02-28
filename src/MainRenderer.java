@@ -45,45 +45,10 @@ public HUD hud;
          KeyHandler keyHandler1 = new KeyHandler(player);
          entityHandler.entities.add(player);
 
-         for(int i = 0; i < 3; i++){
-             int a = random.nextInt(3);
-             double x = random.nextDouble(2)-1;
-             double y = random.nextDouble(2)-1;
-             double v1 = random.nextDouble(0.02)-0.01;
-             double v2 = random.nextDouble(0.02)-0.01;
-             double v3 = random.nextDouble(0.02)-0.01;
-             switch (a) {
-                 case 0:
-                     try {
-                         asteroidM = LoadModel.loadModel(new File(asteroid1.toURI()), Color.white, camera.renderer, camera);
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
-                     asteroidM.init(triangles);
-                     entityHandler.entities.add(new Asteroid(asteroidM, new Vector3(x, y, 0), entityHandler, new Vector3(v1,-v1,0), 0.7, this));
-
-                 case 1:
-                     try {
-                         asteroidMM = LoadModel.loadModel(new File(asteroid2.toURI()), Color.white, camera.renderer, camera);
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
-                     asteroidMM.init(triangles);
-                     entityHandler.entities.add(new Asteroid(asteroidMM, new Vector3(x, y, 0), entityHandler, new Vector3(v2, -v2, 0), 0.7, this));
-
-
-                 case 2:
-                     try {
-                         asteroidMMM = LoadModel.loadModel(new File(asteroid3.toURI()), Color.white, camera.renderer, camera);
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
-                     asteroidMMM.init(triangles);
-                     entityHandler.entities.add(new Asteroid(asteroidMMM, new Vector3(x, y, 0), entityHandler, new Vector3(v3, -v3, 0), 0.7, this));
-
-             }
-
-             try {
+         for(int i = 0; i < 6; i++){
+		 spawnAsteroid(0.7, true, null);
+        }
+	      try {
                  ufo1 = LoadModel.loadModel(new File(ufo.toURI()), Color.white, camera.renderer, camera);
              } catch (Exception e) {
                  e.printStackTrace();
@@ -91,7 +56,8 @@ public HUD hud;
              ufo1.init(triangles);
              entityHandler.entities.add(new Ufo(ufo1, new Vector3(0, 0, 0), entityHandler, new Vector3(0.001,0.001,0), 0.7, this));
 
-         }
+
+
 
 	hud = new HUD(player);
          addKeyListener(keyHandler1);
@@ -105,6 +71,52 @@ public HUD hud;
          triangles.render(graphics);
 	 hud.render(graphics);
      }
+
+     public void spawnAsteroid(double size, boolean randomPosition, Vector3 position) {
+        int a = random.nextInt(3);
+	double x, y;
+		if (randomPosition) {
+             x = random.nextDouble(2)-1;
+             y = random.nextDouble(2)-1;
+		} else {
+			x = position.x;
+			y = position.y;
+		}
+             double vx = random.nextDouble(0.02)-0.01;
+             double vy = random.nextDouble(0.02)-0.01;
+             switch (a) {
+                 case 0:
+                     try {
+                         asteroidM = LoadModel.loadModel(new File(asteroid1.toURI()), Color.white, camera.renderer, camera);
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                     asteroidM.init(triangles);
+                     entityHandler.entities.add(new Asteroid(asteroidM, new Vector3(x, y, 0), entityHandler, new Vector3(vx,vy,0), size, this));
+			break;
+                 case 1:
+                     try {
+                         asteroidMM = LoadModel.loadModel(new File(asteroid2.toURI()), Color.white, camera.renderer, camera);
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                     asteroidMM.init(triangles);
+                     entityHandler.entities.add(new Asteroid(asteroidMM, new Vector3(x, y, 0), entityHandler, new Vector3(vx, vy, 0), size, this));
+		     break;
+
+
+                 case 2:
+                     try {
+                         asteroidMMM = LoadModel.loadModel(new File(asteroid3.toURI()), Color.white, camera.renderer, camera);
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                     }
+                     asteroidMMM.init(triangles);
+                     entityHandler.entities.add(new Asteroid(asteroidMMM, new Vector3(x, y, 0), entityHandler, new Vector3(vx, vy, 0), size, this));
+			break;
+             }
+
+            }
 }
 
 //    URL classPath = getClass().getResource("player.model"); // żebyśmy nie musieli tego pisać za każdym razem

@@ -56,9 +56,17 @@ public class Bullet extends Entity {
             if (entityHandler.entities.get(i) != this) {
                 if (collision(entityHandler.entities.get(i).hitbox)) {
                     if (entityHandler.entities.get(i).getClass() == Asteroid.class) {
-                        util.Console.log("Kolizja z asteroidą (pocisk)");
+			renderer.hud.score += ((Asteroid) entityHandler.entities.get(i)).size / 0.7 * 1000; 
+			model.remove(renderer.triangles);
+			if (((Asteroid) entityHandler.entities.get(i)).size >= 0.3) {
+				renderer.spawnAsteroid(((Asteroid) entityHandler.entities.get(i)).size/2, false, entityHandler.entities.get(i).position);
+				renderer.spawnAsteroid(((Asteroid) entityHandler.entities.get(i)).size/2, false, entityHandler.entities.get(i).position);
+			}
+			
                         entityHandler.entities.get(i).model.remove(renderer.triangles);
                         entityHandler.entities.remove(entityHandler.entities.get(i));
+			entityHandler.entities.remove(this);
+			break;
                     }
                 }
             }
