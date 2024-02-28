@@ -10,10 +10,10 @@ public class HUD {
 	Player player;
 	Font font;
 	public HUD(Player player) {
-		this.player = player;	
-		font = new Font("Sans Serif", Font.PLAIN, 30);
+		this.player = player;
+		font = new Font("OCR A Extended", Font.PLAIN, 30);
 	}
-	
+
 	public void update() {
 
 	}
