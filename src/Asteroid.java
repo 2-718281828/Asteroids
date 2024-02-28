@@ -17,7 +17,7 @@ public class Asteroid extends Entity {
 		this.velocity = velocity;
 		this.size = size;
 		this.renderer = renderer;
-		model.scale(size * 0.02);
+		model.scale(size * 0.04);
 		updateHitbox();
 	}
 
