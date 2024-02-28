@@ -28,6 +28,7 @@ URL asteroid2 = getClass().getResource("a2.model");
 URL asteroid3 = getClass().getResource("a3.model");
 URL ufo = getClass().getResource("ufo1.model");
 Model asteroidM, asteroidMM, asteroidMMM, ufo1;
+public HUD hud;
 
      public MainRenderer(Vector2 dimensions, Camera camera) {
             super(dimensions, camera);//
@@ -90,9 +91,9 @@ Model asteroidM, asteroidMM, asteroidMMM, ufo1;
              ufo1.init(triangles);
              entityHandler.entities.add(new Ufo(ufo1, new Vector3(0, 0, 0), entityHandler, new Vector3(0.001,0.001,0), 0.7, this));
 
-
          }
 
+	hud = new HUD(player);
          addKeyListener(keyHandler1);
 	 addKeyListener(camera);
 	 playerM.scale(0.5);
@@ -102,6 +103,7 @@ Model asteroidM, asteroidMM, asteroidMMM, ufo1;
 
      public void render(Graphics2D graphics) {
          triangles.render(graphics);
+	 hud.render(graphics);
      }
 }
 
