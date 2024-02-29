@@ -8,17 +8,17 @@ import java.net.URL;
 
 
 public class Sound {
-    // URL sound1 = Sound.class.getResource("1.wav");
-    public static void play(URL url){
-        try {
-            File sound = new File(url.getPath());
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sound);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-            //System.out.println(url.getPath());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void play(String name){
+    String classPath;
+    classPath = Sound.class.getResource("").getPath();
+       try {
+        File sound = new File(classPath+name);
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(sound);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     }
 }

@@ -34,6 +34,7 @@ public class KeyHandler implements KeyListener {
         }
         if(e.getKeyCode()==KeyEvent.VK_SPACE){
             player.space = true;
+            Sound.play("/2.wav");
         }
 
     }
@@ -60,14 +61,10 @@ public class KeyHandler implements KeyListener {
             if (e.getKeyCode ()==KeyEvent.VK_ENTER){
                 player.renderer.game = true;
                 player.renderer.startGame();
-                try {
-                    Sound.play(getClass().getResource("/1.wav"));
-                }
-                catch(Exception q) {
-                    q.printStackTrace();
+                Sound.play("/3.wav");
+
                 }
             }
         }
 
     }
-}
