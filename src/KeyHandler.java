@@ -6,6 +6,7 @@ import util.Console;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class KeyHandler implements KeyListener {
 
@@ -19,7 +20,7 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
 
-    }//
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -57,6 +58,18 @@ public class KeyHandler implements KeyListener {
         }
         if(e.getKeyCode()==KeyEvent.VK_SPACE){
             player.space = false;
+        }
+        if(!player.renderer.game) {
+            if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                player.renderer.game = true;
+                player.renderer.startGame();
+                try {
+                    Sounds.play("1.wav");
+                }
+                catch (Exception q) {
+                    q.printStackTrace();
+                }
+            }
         }
 
     }
