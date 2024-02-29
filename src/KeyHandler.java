@@ -63,6 +63,12 @@ public class KeyHandler implements KeyListener {
             if (e.getKeyCode()==KeyEvent.VK_ENTER){
                 player.renderer.game = true;
                 player.renderer.startGame();
+                try {
+                    Sounds.play("1.wav");
+                }
+                catch (Exception q) {
+                    q.printStackTrace();
+                }
             }
         }
 
