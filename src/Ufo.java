@@ -27,7 +27,6 @@ public class Ufo extends Entity {
     int timer = 0;
     @Override
     public void logic() {
-
 	    timer ++;
 	    if (timer >= 0.7 * 60) {
 		timer = 0; 

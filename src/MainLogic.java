@@ -1,5 +1,6 @@
 package src;
 
+import com.sun.tools.javac.Main;
 import engine.Logic;
 import entity.EntityHandler;
 import renderer.Camera;
@@ -13,8 +14,13 @@ public class MainLogic implements Logic {
         }
 
         public void update() {
-            camera.update(); // aktualizacja kameryy
-            ((MainRenderer) camera.renderer).entityHandler.logic();
+            if(((MainRenderer)camera.renderer).game){
+                camera.update(); // aktualizacja kameryy
+                ((MainRenderer) camera.renderer).entityHandler.logic();
+            } else {
+                ((MainRenderer) camera.renderer).entityHandler1.logic();
+            }
+            ((MainRenderer) camera.renderer).hud.update();
         }
 
 }
