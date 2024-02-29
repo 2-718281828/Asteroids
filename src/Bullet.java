@@ -56,11 +56,11 @@ public class Bullet extends Entity {
             if (entityHandler.entities.get(i) != this) {
                 if (collision(entityHandler.entities.get(i).hitbox)) {
                     if (entityHandler.entities.get(i).getClass() == Asteroid.class) {
-			renderer.hud.score += ((Asteroid) entityHandler.entities.get(i)).size / 0.7 * 500;
+			renderer.hud.score += (int) (((Asteroid) entityHandler.entities.get(i)).size / 0.7 * 500);
 			model.remove(renderer.triangles);
 			if (((Asteroid) entityHandler.entities.get(i)).size >= 0.3) {
-				renderer.spawnAsteroid(((Asteroid) entityHandler.entities.get(i)).size/2, false, entityHandler.entities.get(i).position);
-				renderer.spawnAsteroid(((Asteroid) entityHandler.entities.get(i)).size/2, false, entityHandler.entities.get(i).position);
+				renderer.spawnAsteroid(((Asteroid) entityHandler.entities.get(i)).size/2, false, entityHandler.entities.get(i).position, renderer.triangles, entityHandler);
+				renderer.spawnAsteroid(((Asteroid) entityHandler.entities.get(i)).size/2, false, entityHandler.entities.get(i).position, renderer.triangles, entityHandler);
 			}
 
                         entityHandler.entities.get(i).model.remove(renderer.triangles);

@@ -17,7 +17,6 @@ public class Ufo extends Entity {
     }
     @Override
     public void logic() {
-
         // przemieszcza obiekt i model
         position.add(velocity);
         model.move(velocity);

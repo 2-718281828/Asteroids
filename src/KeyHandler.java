@@ -61,8 +61,8 @@ public class KeyHandler implements KeyListener {
         }
         if(!player.renderer.game) {
             if (e.getKeyCode()==KeyEvent.VK_ENTER){
-                Console.log("abc"); // dziala w Released!!!!
                 player.renderer.game = true;
+                player.renderer.startGame();
             }
         }
 
