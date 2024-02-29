@@ -29,9 +29,11 @@ public class MainRenderer extends Renderer {
     URL ufo = getClass().getResource("ufo11.model");
     Model asteroidM, asteroidMM, asteroidMMM, ufo1;
     public HUD hud;
+    Camera camera;
 
     public MainRenderer(Vector2 dimensions, Camera camera) {
         super(dimensions, camera);//
+	this.camera = camera;
         triangles = new Triangles();
         try {
             playerM = LoadModel.loadModel(new File(classPath.toURI()), Color.white, camera.renderer, camera); // ładujemy model z pliku
@@ -76,7 +78,7 @@ public class MainRenderer extends Renderer {
                     e.printStackTrace();
                 }
                 ufo1.init(triangles);
-                entityHandler.entities.add(new Ufo(ufo1, new Vector3(-1, p, 0), entityHandler, new Vector3(vx, 0, 0), this));
+                entityHandler.entities.add(new Ufo(ufo1, new Vector3(-1, p, 0), entityHandler, new Vector3(vx, 0, 0), this, camera));
                 break;
             case 1:
                 try {
@@ -85,7 +87,7 @@ public class MainRenderer extends Renderer {
                     e.printStackTrace();
                 }
                 ufo1.init(triangles);
-                entityHandler.entities.add(new Ufo(ufo1, new Vector3(1, p, 0), entityHandler, new Vector3(-vx, 0, 0),  this));
+                entityHandler.entities.add(new Ufo(ufo1, new Vector3(1, p, 0), entityHandler, new Vector3(-vx, 0, 0),  this, camera));
                 break;
 
         }
