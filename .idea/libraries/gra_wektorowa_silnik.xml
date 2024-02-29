@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gra_wektorowa_silnik">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/gra_wektorowa_silnik.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
