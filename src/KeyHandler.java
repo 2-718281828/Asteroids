@@ -1,12 +1,8 @@
 package src;
 
-import entity.EntityHandler;
-import maths.Vector3;
-import util.Console;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.security.Key;
+import java.net.URL;
 
 public class KeyHandler implements KeyListener {
 
@@ -60,13 +56,14 @@ public class KeyHandler implements KeyListener {
             player.space = false;
         }
         if(!player.renderer.game) {
-            if (e.getKeyCode()==KeyEvent.VK_ENTER){
+            //URL sound1 = Sound.class.getResource("1.wav");
+            if (e.getKeyCode ()==KeyEvent.VK_ENTER){
                 player.renderer.game = true;
                 player.renderer.startGame();
                 try {
-                    Sounds.play("1.wav");
+                    Sound.play(getClass().getResource("/1.wav"));
                 }
-                catch (Exception q) {
+                catch(Exception q) {
                     q.printStackTrace();
                 }
             }
