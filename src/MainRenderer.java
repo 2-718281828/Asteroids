@@ -34,9 +34,11 @@ public class MainRenderer extends Renderer {
     Model asteroidM, asteroidMM, asteroidMMM, ufo1, text;
     public HUD hud;
     public Player player;
+    Camera camera;
 
     public MainRenderer(Vector2 dimensions, Camera camera) {
         super(dimensions, camera);//
+	this.camera = camera;
         triangles = new Triangles();
         triangles1 = new Triangles();
         try {
@@ -123,7 +125,7 @@ public class MainRenderer extends Renderer {
                     e.printStackTrace();
                 }
                 ufo1.init(triangles);
-                entityHandler.entities.add(new Ufo(ufo1, new Vector3(-1, p, 0), entityHandler, new Vector3(vx, 0, 0), this));
+                entityHandler.entities.add(new Ufo(ufo1, new Vector3(-1, p, 0), entityHandler, new Vector3(vx, 0, 0), this, camera));
                 break;
             case 1:
                 try {
@@ -132,7 +134,7 @@ public class MainRenderer extends Renderer {
                     e.printStackTrace();
                 }
                 ufo1.init(triangles);
-                entityHandler.entities.add(new Ufo(ufo1, new Vector3(1, p, 0), entityHandler, new Vector3(-vx, 0, 0), this));
+                entityHandler.entities.add(new Ufo(ufo1, new Vector3(1, p, 0), entityHandler, new Vector3(-vx, 0, 0),  this, camera));
                 break;
 
         }
